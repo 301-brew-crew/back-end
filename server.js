@@ -10,7 +10,7 @@ const home = require('./routes/home.js');
 const yelpAPI = require('./routes/yelp.js');
 const bingAPI = require('./routes/bing.js');
 const missingPage = require('./routes/missingPage.js');
-const verifyUser = require("./auth.js");
+// const verifyUser = require("./auth.js");
 // app.use(verifyUser);
 
 app.get('/', home);

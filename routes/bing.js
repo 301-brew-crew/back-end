@@ -3,7 +3,10 @@ const axios = require('axios');
 const bingAPI = (req, res) => {
   axios.get(`http://dev.virtualearth.net/REST/V1/Routes/Walking?${req.params.directionQuery}&du=mi&optimize=distance&optimizeWaypoints=true&key=${process.env.BING}`).then(response => {
     res.send(response.data.resourceSets[0].resources[0].routeLegs.map(wayPoint => new BingDirections(wayPoint)));
-  }).then().catch(error => console.error(error));
+  }).catch(error => {
+    console.error(error);
+    res.send([]);
+  });
 }
 
 class BingDirections {
