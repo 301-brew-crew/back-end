@@ -25,6 +25,8 @@ app.get("/", home);
 app.get("/yelp/:location", yelpAPI);
 app.get("/bingDirections/:directionQuery", bingAPI);
 app.get('/dbResults', getBeer);
+
+
         
 
 async function getBeer(req, res) {
