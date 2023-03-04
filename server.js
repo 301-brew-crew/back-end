@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 app.use(cors());
+app.use(express.json())
 require("dotenv").config();
 const PORT = process.env.PORT || 3002;
 const mongoose = require("mongoose");
@@ -25,9 +26,22 @@ app.get("/", home);
 app.get("/yelp/:location", yelpAPI);
 app.get("/bingDirections/:directionQuery", bingAPI);
 app.get('/dbResults', getBeer);
+app.post('/dbResults', postBeer);
 
+async function postBeer(req, res) {
+  console.log(req.body);
 
-        
+  try {
+    let createBeer = await BeerModel.create({
+      yelpData: req.body.yelpData,
+      directions: req.body.directions,
+    });
+    res.status(200).send(createBeer);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("server error");
+  }
+}
 
 async function getBeer(req, res) {
   try {
