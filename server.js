@@ -27,6 +27,21 @@ app.get("/yelp/:location", yelpAPI);
 app.get("/bingDirections/:directionQuery", bingAPI);
 app.get('/dbResults', getBeer);
 app.post('/dbResults', postBeer);
+app.delete('/dbResults/:id', deleteBeer);
+
+
+async function deleteBeer(req, res) {
+  let id = req.params.id
+
+  try {
+    let deleteBeer = await BeerModel.findByIdAndDelete(id);
+    res.status(200).send(deleteBeer);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("server error");
+  }
+}
+
 
 async function postBeer(req, res) {
   console.log(req.body);
