@@ -25,6 +25,7 @@ const yelpAPI = (req, res) => {
     })
     .catch((error) => {
       console.error(error);
+      res.send([]);
     });
 }
 
